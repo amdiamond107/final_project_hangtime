@@ -10,6 +10,9 @@ metadata = MetaData(naming_convention={
 
 db = SQLAlchemy(metadata=metadata)
 
+#migration yet to take effect: added "image" in courts table
+
+
 class Player(db.Model, SerializerMixin):
     __tablename__ = 'players'
 
@@ -100,9 +103,8 @@ class Game(db.Model, SerializerMixin):
 # Table Columns: 
     id = db.Column(db.Integer, primary_key=True)
     date_time = db.Column(db.DateTime, server_default = db.func.now())
-    type = db.Column(db.String)
     description = db.Column(db.String)
-
+    game_type = db.Column(db.String)
     court_id = db.Column(db.Integer, db.ForeignKey('courts.id'))
 
 # Table Relationships:
@@ -110,6 +112,12 @@ class Game(db.Model, SerializerMixin):
     court = db.relationship('Court', back_populates='games')
     players = association_proxy('player_games', 'player', creator=lambda p: PlayerGame(player=p))
 
+    validates('game_type')
+    def validate_name(self, key, value):
+        if not (value in ['Indoor', 'Outdoor']):
+            raise ValueError(f'Not a valid {key} - must be "Indoor" or "Outdoor"')
+        return value
+    
 # Validations:
     # validates('date_time')
     # def validate_name(self, key, value):
@@ -133,10 +141,24 @@ class Court(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     location = db.Column(db.String)
+    image = db.Column(db.String)
+    court_type = db.Column(db.String)
+
 
 # Table Relationships:
     games = db.relationship('Game', back_populates='court', cascade='all, delete-orphan')
 
+    validates('title')
+    def validate_title(self, key, value):
+        if not (3 <= len(value) <= 25):
+            raise ValueError(f'Not a valid {key} - must be between 3 and 25 characters in length...')
+        return value
+    
+    validates('court_type')
+    def validate_name(self, key, value):
+        if not (value in ['Indoor', 'Outdoor']):
+            raise ValueError(f'Not a valid {key} - must be "Indoor" or "Outdoor"')
+        return value
 # # Validations:
 #     validates('title')
 #     def validate_name(self, key, value):

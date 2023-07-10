@@ -4,33 +4,33 @@ import { Route, Switch } from "react-router-dom"
 
 import NavBar from './NavBar'
 import Header from './Header'
-import HotelList from './HotelList'
-import NewHotelForm from './NewHotelForm'
-import UpdateHotelForm from './UpdateHotelForm'
+import PlayerList from './PlayerList'
+import NewPlayerForm from './NewPlayerForm'
+import UpdatePlayerForm from './UpdatePlayerForm'
 
 function App() {
 
-  const [hotels, setHotels] = useState([])
+  const [players, setPlayers] = useState([])
   const [postFormData, setPostFormData] = useState({})
   const [idToUpdate, setIdToUpdate] = useState(0)
   const [patchFormData, setPatchFormData] = useState({})
 
   useEffect(() => {
-    fetch('/hotels')
+    fetch('/players')
     .then(response => response.json())
-    .then(hotelData => setHotels(hotelData))
+    .then(playerData => setPlayers(playerData))
   }, [])
 
   useEffect(() => {
-    if(hotels.length > 0 && hotels[0].id){
-      setIdToUpdate(hotels[0].id)
+    if(players.length > 0 && players[0].id){
+      setIdToUpdate(players[0].id)
     }
-  }, [hotels])
+  }, [players])
 
-  function addHotel(event){
+  function addPlayer(event){
     event.preventDefault()
 
-    fetch('/hotels', {
+    fetch('/players', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,12 +39,12 @@ function App() {
       body: JSON.stringify(postFormData)
     })
     .then(response => response.json())
-    .then(newHotel => setHotels(hotels => [...hotels, newHotel]))
+    .then(newPlayer => setPlayers(players => [...players, newPlayer]))
   }
 
-  function updateHotel(event){
+  function updatePlayer(event){
     event.preventDefault()
-    fetch(`/hotels/${idToUpdate}`, {
+    fetch(`/players/${idToUpdate}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,27 +53,27 @@ function App() {
       body: JSON.stringify(patchFormData)
     })
     .then(response => response.json())
-    .then(updatedHotel => {
-      setHotels(hotels => {
-        return hotels.map(hotel => {
-          if(hotel.id === updatedHotel.id){
-            return updatedHotel
+    .then(updatedPlayer => {
+      setPlayers(players => {
+        return players.map(player => {
+          if(player.id === updatedPlayer.id){
+            return updatedPlayer
           }
           else{
-            return hotel
+            return player
           }
         })
       })
     })
   }
 
-  function deleteHotel(id){
-    fetch(`/hotels/${id}`, {
+  function deletePlayer(id){
+    fetch(`/players/${id}`, {
       method: "DELETE"
     })
-    .then(() => setHotels(hotels => {
-      return hotels.filter(hotel => {
-        return hotel.id !== id
+    .then(() => setPlayers(players => {
+      return players.filter(player => {
+        return player.id !== id
       })
     }))
   }
@@ -92,14 +92,14 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <h1>Welcome! Here is the list of hotels available:</h1>
-          <HotelList hotels={hotels} deleteHotel={deleteHotel}/>
+          <h1>Welcome! Here is a list of Hangtime Ballers in your local area... </h1>
+          <PlayerList players={players} deletePlayer={deletePlayer}/>
         </Route>
-        <Route path="/add_hotel">
-          <NewHotelForm addHotel={addHotel} updatePostFormData={updatePostFormData}/>
+        <Route path="/add_player">
+          <NewPlayerForm addPlayer={addPlayer} updatePostFormData={updatePostFormData}/>
         </Route>
-        <Route path="/update_hotel">
-          <UpdateHotelForm updateHotel={updateHotel} setIdToUpdate={setIdToUpdate} updatePatchFormData={updatePatchFormData} hotels={hotels}/>
+        <Route path="/update_player">
+          <UpdatePlayerForm updatePlayer={updatePlayer} setIdToUpdate={setIdToUpdate} updatePatchFormData={updatePatchFormData} players={players}/>
         </Route>
       </Switch>
     </div>

@@ -27,9 +27,9 @@ with app.app_context():
     games.append(Game(date_time=datetime(2023, 10, 7, 19, 0 ,0), type="outdoors", description="Recreational co-ed 3-on-3"))
 
     courts = []
-    courts.append(Court(title="PS 6 Gym", location="45 East 81st St, New York, NY, 10028"))
-    courts.append(Court(title="Columbia Prep Gym", location="5 West 93rd St, New York, NY, 10025"))
-    courts.append(Court(title="Holcombe Rucker Park", location="West 155th St, New York, NY, 10039"))
+    courts.append(Court(title="PS 6 Gym", location="45 East 81st St, New York, NY, 10028", image='tbd.url'))
+    courts.append(Court(title="Columbia Prep Gym", location="5 West 93rd St, New York, NY, 10025", image='tbd.url'))
+    courts.append(Court(title="Holcombe Rucker Park", location="West 155th St, New York, NY, 10039", image='tbd.url'))
 
     db.session.add_all(players)
     db.session.add_all(player_games)

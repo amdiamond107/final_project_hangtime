@@ -7,8 +7,8 @@ function NavBar(){
                 <NavLink to="/">Home</NavLink>
             </div>
             <div>
-                <NavLink to="/add_hotel">Add Hotel</NavLink>
-                <NavLink to="/update_hotel">Update Hotel</NavLink>
+                <NavLink to="/add_player">Add Player</NavLink>
+                <NavLink to="/update_player">Update Player</NavLink>
             </div>
         </nav>
     )
