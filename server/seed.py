@@ -17,9 +17,9 @@ with app.app_context():
     players.append(Player(username="dunkmasterflex", age=25, gender="male", height="6 feet 9 inches", weight="250 pounds", position="C", image='https://thumbs.dreamstime.com/b/street-ball-basketball-streetballer-dunk-942736.jpg'))
 
     player_games = []
-    player_games.append(PlayerGame(score="100-99"))
-    player_games.append(PlayerGame(score="88-85"))
-    player_games.append(PlayerGame(score="94-89"))
+    player_games.append(PlayerGame(home_score=100, away_score=99))
+    player_games.append(PlayerGame(home_score=88, away_score=87))
+    player_games.append(PlayerGame(home_score=94, away_score=90))
 
     games = []
     games.append(Game(date_time=datetime(2023, 9, 9, 19, 0 ,0), type="indoors", description="Advanced Men-Only 5-on-5"))
