@@ -13,10 +13,16 @@ function NavBar({handleLogOut}){
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
+                    <NavLink className="nav-link" to="/">Home</NavLink>
+                    </li>                    
+                    <li class="nav-item">
                     <NavLink className="nav-link" to="/courts">Courts</NavLink>
                     </li>
                     <li class="nav-item">
-                    <NavLink className="nav-link" to="/games">Games</NavLink>
+                    <NavLink className="nav-link" to="/find_games">Join Games</NavLink>
+                    </li>
+                    <li class="nav-item">
+                    <NavLink className="nav-link" to="/create_games">Create Games</NavLink>
                     </li>
                     <li class="nav-item">
                     <NavLink className="nav-link" to="/players">Players</NavLink>

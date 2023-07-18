@@ -1,16 +1,7 @@
 import {useState} from 'react'
 
-function Game({game}){
-
-    // const [joinGame, setJoinGame] = useState(
-    //     game.spots_remaining--);
-    
-    // const [leaveGame, setLeaveGame] = useState(
-    //     game.spots_remaining++);
-
-    const [spots, setSpots] = useState(true)
-    const [leaveSpots, setLeaveSpots] = useState(true)
-
+function Game({game, joinGame, updateJoinGameFormData}){
+    const [hasJoinedGame, setHasJoinedGame] = useState(false);
     return (
         <tr>
             <td className="row-name">
@@ -32,12 +23,19 @@ function Game({game}){
                 <span>{game.spots_remaining}</span>
             </td>
 
-            {spots ? (
-            <button onClick={setSpots(true)} className="primary">
-                Join Game
-                </button>
+            {hasJoinedGame ? (
+            <button onClick={() => {
+                joinGame(game.id, game.spots_remaining + 1)
+                setHasJoinedGame(false)
+            }} className="primary">Leave Game
+            </button>
+            
             ) : (
-                <button onClick={setLeaveSpots(true)}>Leave Game</button>
+                
+                <button onClick={() => {
+                    joinGame(game.id, game.spots_remaining - 1)
+                    setHasJoinedGame(true)
+                }}>Join Game</button>
             )}
         </tr>
     );

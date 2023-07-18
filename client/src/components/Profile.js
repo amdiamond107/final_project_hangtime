@@ -17,18 +17,3 @@ function Profile({ games, joinGame}) {
 export default Profile;
 
 
-
-// import Player from './Player'
-
-// function Profile({players}){
-//     players.map(player => {
-//         if (player.id === players.id){
-//             return <Player key={player.id} player={player}/>
-//         } else {
-//             return false
-//         }
-//     })
-// }
-
-
-// export default Profile

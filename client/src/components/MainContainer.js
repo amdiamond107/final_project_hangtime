@@ -18,7 +18,6 @@ import SearchGame from "./SearchGame";
 import SearchCourt from "./SearchCourt";
 import Profile from "./Profile";
 
-
 function App() {
 
   const [players, setPlayers] = useState([])
@@ -196,33 +195,36 @@ function App() {
     })
   }
 
-  function joinGame(id){
-    fetch(`/games/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(patchGameFormData)
-    })
-    .then(response => response.json())
-    .then(updatedGame => {
-      setGames(games => {
-        return games.map(game => {
-          if(game.spots_remaining > 0){
-            return updatedGame
-          }
-          else {
-            return game
-          }
+  function joinGame(gameIdToUpdate, spots_remaining){
+        fetch(`/games/${gameIdToUpdate}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({spots_remaining: spots_remaining})
         })
-      })
-    })
-  }
+        .then(response => {
+        if(response.ok){
+            response.json()
+            .then(updatedGame => {
+            setGames(games.map(game => {
+                if (game.id === updatedGame.id){
+                return {...game, spots_remaining: spots_remaining}
+                }
+                else {
+                return game
+                }
+            }))
+            })
+        }
+        })
+    }
 
-  function updateJoinGameFormData(event){
-    setPatchGameFormData({...patchGameFormData, [event.target.name]: event.target.value})
-  } 
+
+    function updateJoinGameFormData(event){
+        setPatchGameFormData({...patchGameFormData, [event.target.name]: event.target.value})
+    } 
 
 
   useEffect(() => {
@@ -271,9 +273,6 @@ function App() {
           alert('invalid login - please try again')
         }
       })
-      // .then(response => response.json())
-      // .then(player => setLoggedInPlayer(player))
-      // console.log(loginFormData)
     }
 
     function updateLoginFormData(event){
@@ -304,35 +303,20 @@ function App() {
           <h1>Find a court to join a game or to schedule a new one at...</h1>
           <SearchCourt setSearchCourtText={setSearchCourtText} searchCourtText={searchCourtText} />
           <CourtList courts={filteredCourts} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData}/>
-          
-        </Route>
-
-        <Route exact path="/games">
-          <GameNavBar/>
-          <GameList games={games} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData}/>
-                    
-
         </Route>
 
         <Route exact path="/find_games">
+          <h1>
+            YOU'VE GOT NEXT - JOIN UPCOMING GAMES LISTED BELOW...
+          </h1>
           <SearchGame setSearchGameText={setSearchGameText} searchGameText={searchGameText} />
-          <GameList games={games} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData}/>
+          <GameList games={filteredGames} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData}/>
         </Route>
 
         <Route exact path="/create_games">
           <NewGameForm addGame={addGame} courts={courts} updateGameFormData={updateGameFormData}/>
-          {/* <>
-          <Dropdown>
-          <Element />
-          </Dropdown>
-          </> */}
+
         </Route>
-
-
-
-        {/* <Route path="/schedule_new_game">
-          <NewGameForm addGame={addGame} updatePostGameFormData={updatePostGameFormData}/>
-        </Route> */}
 
         <Route exact path="/players">
           <h1>Squad up - invite another Hangtime Baller to join in on one of your upcoming games...</h1>
@@ -347,7 +331,6 @@ function App() {
         <Route path="/update_player">
           <UpdatePlayerForm updatePlayer={updatePlayer} setPlayerIdToUpdate={setPlayerIdToUpdate} updatePatchPlayerFormData={updatePatchPlayerFormData} players={players}/>
         </Route>
-
       </Switch>
     </div>
   );

@@ -10,8 +10,6 @@ metadata = MetaData(naming_convention={
 
 db = SQLAlchemy(metadata=metadata)
 
-#migration yet to take effect: added "image" in courts table
-
 
 class Player(db.Model, SerializerMixin):
     __tablename__ = 'players'

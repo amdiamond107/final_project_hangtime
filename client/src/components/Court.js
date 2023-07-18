@@ -1,8 +1,7 @@
-function Court({court, joinGame}){
-    
+import {NavLink} from "react-router-dom"
 
+function Court({court}){
     return (
-
         <tr>
             <td className="row-name">
                 <img src={court.court_image} />
@@ -14,21 +13,12 @@ function Court({court, joinGame}){
                 <span>{court.location} ({court.court_type})</span>
             </td>
             <td>
-            <button className="btn btn-outline-secondary" onClick={() => joinGame(court.id)}>View Games</button>
+                <NavLink to="/find_games">View Games</NavLink>
             </td>
             <td>
-            <button className="btn btn-primary" onClick={() => joinGame(court.id)}>Schedule a Game</button>
+                <NavLink to="/create_games">Create New Game</NavLink>
             </td>
         </tr>
     )
 }
-//     return (
-//         <li className="court">
-//             <h1>Court # {court.id}: {court.title} located at {court.location}</h1>
-            // <img src={court.image} alt={court.title} />
-//             <button onClick={() => joincourt(court.id)}>Join court</button>
-//         </li>
-//     )
-// }
-
 export default Court
