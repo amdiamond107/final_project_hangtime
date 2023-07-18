@@ -1,6 +1,6 @@
 import {NavLink} from "react-router-dom"
 
-function NavBar({handleLogOut}){
+function LoggedOutNavBar(){
     return (
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -13,19 +13,10 @@ function NavBar({handleLogOut}){
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                    <NavLink className="nav-link" to="/courts">Courts</NavLink>
+                    <NavLink className="nav-link" to="/login">Log In</NavLink>
                     </li>
                     <li class="nav-item">
-                    <NavLink className="nav-link" to="/games">Games</NavLink>
-                    </li>
-                    <li class="nav-item">
-                    <NavLink className="nav-link" to="/players">Players</NavLink>
-                    </li>
-                    <li class="nav-item">
-                    <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                    </li>
-                    <li class="nav-item">
-                    <button className="nav-link" onClick={handleLogOut}>Log Out</button>
+                    <NavLink className="nav-link" to="/create-account">Create Account</NavLink>
                     </li>
                 </ul>
                 </div>
@@ -34,4 +25,4 @@ function NavBar({handleLogOut}){
     )
 }
 
-export default NavBar;
+export default LoggedOutNavBar;

@@ -1,19 +1,19 @@
 import {useState} from 'react'
 
-function NewPlayerForm({addPlayer, updatePostFormData}){
+function NewPlayerForm({addPlayer, updatePostPlayerFormData}){
 
-    const [formSubmitted, setFormSubmitted] = useState(false)
+    const [playerFormSubmitted, setPlayerFormSubmitted] = useState(false)
 
     return (
         <div className="player-form">
             <h2>Add New Player Form</h2>
-            {formSubmitted ? <h1>Thanks for adding a new player!</h1> :
+            {playerFormSubmitted ? <h1>Thanks for creating your new player player!</h1> :
             <form onSubmit={event => {
                 addPlayer(event)
-                setFormSubmitted(formSubmitted => !formSubmitted)
+                setPlayerFormSubmitted(playerFormSubmitted => !playerFormSubmitted)
             }}>
-                <input onChange={updatePostFormData} type="text" name="name" placeholder="Player name" required/>
-                <input onChange={updatePostFormData} type="text" name="image" placeholder="Image URL" required/>
+                <input onChange={updatePostPlayerFormData} type="text" name="name" placeholder="Player name" required/>
+                <input onChange={updatePostPlayerFormData} type="text" name="image" placeholder="Image URL" required/>
                 <input type="submit" value="Add Player"/>
             </form>}
         </div>

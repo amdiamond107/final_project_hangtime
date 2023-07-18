@@ -19,12 +19,13 @@ class Player(db.Model, SerializerMixin):
 # Table Columns:
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String, nullable=False)
     height = db.Column(db.String, nullable=False)
     weight = db.Column(db.String, nullable=False)
     position = db.Column(db.String, nullable=False)
-    image = db.Column(db.String)
+    player_image = db.Column(db.String)
 # TBD on whether these will be necessary for API database:
     # dunkability = db.Column(db.String)
     # frequency = db.Column(db.String)
@@ -102,9 +103,11 @@ class Game(db.Model, SerializerMixin):
 
 # Table Columns: 
     id = db.Column(db.Integer, primary_key=True)
-    date_time = db.Column(db.DateTime, server_default = db.func.now())
-    description = db.Column(db.String)
+    date_time = db.Column(db.String)
+    skill_level = db.Column(db.String)
+    gender = db.Column(db.String)
     game_type = db.Column(db.String)
+    spots_remaining = db.Column(db.Integer)
     court_id = db.Column(db.Integer, db.ForeignKey('courts.id'))
 
 # Table Relationships:
@@ -112,13 +115,13 @@ class Game(db.Model, SerializerMixin):
     court = db.relationship('Court', back_populates='games')
     players = association_proxy('player_games', 'player', creator=lambda p: PlayerGame(player=p))
 
-    validates('game_type')
-    def validate_name(self, key, value):
-        if not (value in ['Indoor', 'Outdoor']):
-            raise ValueError(f'Not a valid {key} - must be "Indoor" or "Outdoor"')
-        return value
+#     validates('game_type')
+#     def validate_name(self, key, value):
+#         if not (value in ['Indoor', 'Outdoor']):
+#             raise ValueError(f'Not a valid {key} - must be "Indoor" or "Outdoor"')
+#         return value
     
-# Validations:
+# # Validations:
     # validates('date_time')
     # def validate_name(self, key, value):
     #     pass
@@ -132,33 +135,32 @@ class Game(db.Model, SerializerMixin):
     #     pass
 
     def __repr__(self):
-        return f"Game # {self.id}: {self.description} at {self.date_time}."
+        return f"Game # {self.id}: {self.skill_level} {self.gender} {self.game_type} at {self.date_time} - {self.spots_remaining} open player spots remaining."
     
 class Court(db.Model, SerializerMixin):
     __tablename__ = 'courts'
 
 # Table Columns:
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String)
-    location = db.Column(db.String)
-    image = db.Column(db.String)
-    court_type = db.Column(db.String)
-
-
-# Table Relationships:
+    title = db.Column(db.String, nullable=False)
+    location = db.Column(db.String, nullable=False)
+    court_image = db.Column(db.String)
+    court_type = db.Column(db.String, nullable=False)
+    
+    # Table Relationships:
     games = db.relationship('Game', back_populates='court', cascade='all, delete-orphan')
 
-    validates('title')
-    def validate_title(self, key, value):
-        if not (3 <= len(value) <= 25):
-            raise ValueError(f'Not a valid {key} - must be between 3 and 25 characters in length...')
-        return value
+    # validates('title')
+    # def validate_title(self, key, value):
+    #     if not (3 <= len(value) <= 25):
+    #         raise ValueError(f'Not a valid {key} - must be between 3 and 25 characters in length...')
+    #     return value
     
-    validates('court_type')
-    def validate_name(self, key, value):
-        if not (value in ['Indoor', 'Outdoor']):
-            raise ValueError(f'Not a valid {key} - must be "Indoor" or "Outdoor"')
-        return value
+    # validates('court_type')
+    # def validate_name(self, key, value):
+    #     if not (value in ['Indoor', 'Outdoor']):
+    #         raise ValueError(f'Not a valid {key} - must be "Indoor" or "Outdoor"')
+    #     return value
 # # Validations:
 #     validates('title')
 #     def validate_name(self, key, value):
@@ -168,5 +170,5 @@ class Court(db.Model, SerializerMixin):
 #     def validate_name(self, key, value):
 #         pass  
     def __repr__(self):
-        return f"Court # {self.id}: {self.title} at {self.location}."
+        return f"Court # {self.id}: {self.title} ({self.court_type}) at {self.location}."
     

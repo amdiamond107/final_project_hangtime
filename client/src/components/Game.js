@@ -1,11 +1,46 @@
-function Game({game, deleteGame}){
+import {useState} from 'react'
+
+function Game({game}){
+
+    // const [joinGame, setJoinGame] = useState(
+    //     game.spots_remaining--);
+    
+    // const [leaveGame, setLeaveGame] = useState(
+    //     game.spots_remaining++);
+
+    const [spots, setSpots] = useState(true)
+    const [leaveSpots, setLeaveSpots] = useState(true)
+
     return (
-        <li className="game">
-            <h1>Game # {game.id}: {game.description} | {game.date_time} | {game.type} </h1>
-            <img src={game.image} alt={game.description} />
-            <button onClick={() => deleteGame(game.id)}>Delete Game # {game.id}</button>
-        </li>
-    )
+        <tr>
+            <td className="row-name">
+                <span>{game.date_time}</span>
+            </td>
+            <td>
+                <span>{game.court.title} ({game.court.court_type})</span>
+            </td>
+            <td>
+                <span>{game.skill_level}</span>
+            </td>
+            <td>
+                <span>{game.gender}</span>
+            </td>
+            <td>
+                <span>{game.game_type}</span>
+            </td>
+            <td>
+                <span>{game.spots_remaining}</span>
+            </td>
+
+            {spots ? (
+            <button onClick={setSpots(true)} className="primary">
+                Join Game
+                </button>
+            ) : (
+                <button onClick={setLeaveSpots(true)}>Leave Game</button>
+            )}
+        </tr>
+    );
 }
 
 export default Game

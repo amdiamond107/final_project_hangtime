@@ -28,6 +28,46 @@
   color: #61dafb;
 }
 
+.DropdownButton {
+
+  color: white;
+
+  background-color: blue;
+  border-radius: 5px;
+
+  padding: 5px;
+
+  width: max-content;
+
+}
+
+.DropdownElement {
+
+  color: white;
+
+  background-color: green;
+  border-radius: 5px;
+
+  padding: 5px;
+
+  width: max-content;
+
+}
+
+.noselect {
+
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+}
+.player {
+  border-color: black;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
