@@ -1,9 +1,12 @@
+import { NavLink } from "react-router-dom";
+
 function Login({handleLogin, updateLoginFormData}){
     return(
-        <form onSubmit={handleLogin}>
+        <form>
             <input type="text" name="username" placeholder="Enter Username" onChange={updateLoginFormData} required/> 
             <input type="text" name="password" placeholder="Enter Password" onChange={updateLoginFormData} required/> 
-            <input type="submit"/> 
+            <NavLink className="nav-link" to="/" onClick={handleLogin}>Submit</NavLink>
+            {/* <input type="submit"/>  */}
         </form>
     )
 }

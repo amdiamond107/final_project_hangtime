@@ -11,9 +11,6 @@ function PlayerList({players, joinGame}){
                     <th>
                         Player Name
                     </th>
-                    {/* <th>
-                        Player Rep - should ideally be some type of ranking system based on an algorithm
-                    </th> */}
                     <th>
                         Gender
                     </th>

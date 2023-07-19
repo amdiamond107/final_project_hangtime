@@ -1,7 +1,7 @@
 
 import {useState, useEffect} from 'react'
 import { Route, Switch } from "react-router-dom"
-
+import {NavLink} from "react-router-dom"
 import NavBar from './NavBar'
 import LoggedOutNavBar from './LoggedOutNavBar'
 import Login from './Login'
@@ -16,9 +16,9 @@ import UpdatePlayerForm from './UpdatePlayerForm'
 import UpdateGameForm from './UpdateGameForm'
 import SearchGame from "./SearchGame";
 import SearchCourt from "./SearchCourt";
-import Profile from "./Profile";
+import PlayerProfile from "./PlayerProfile";
 
-function App() {
+function MainContainer() {
 
   const [players, setPlayers] = useState([])
   const [postPlayerFormData, setPostPlayerFormData] = useState({})
@@ -195,6 +195,7 @@ function App() {
     })
   }
 
+
   function joinGame(gameIdToUpdate, spots_remaining){
         fetch(`/games/${gameIdToUpdate}`, {
         method: "PATCH",
@@ -281,6 +282,7 @@ function App() {
       })
     }
 
+
   return (
     <div className="app">
       {loggedInPlayer ? <NavBar handleLogOut= {handleLogOut}/> : <LoggedOutNavBar/>}
@@ -306,11 +308,17 @@ function App() {
         </Route>
 
         <Route exact path="/find_games">
+          <br>
+          </br>
+
           <h1>
-            YOU'VE GOT NEXT - JOIN UPCOMING GAMES LISTED BELOW...
+              You've got next - join upcoming games below...
           </h1>
           <SearchGame setSearchGameText={setSearchGameText} searchGameText={searchGameText} />
+          <br>
+          </br>
           <GameList games={filteredGames} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData}/>
+        
         </Route>
 
         <Route exact path="/create_games">
@@ -324,8 +332,9 @@ function App() {
         </Route>
 
         <Route path="/profile">
-          {/* <Profile players={players}/> */}
-          <NewPlayerForm addPlayer={addPlayer} updatePostPlayerFormData={updatePostPlayerFormData}/>
+          {loggedInPlayer ? <PlayerProfile loggedInPlayer={loggedInPlayer}/> : null
+
+          }
         </Route>
 
         <Route path="/update_player">
@@ -336,4 +345,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainContainer;

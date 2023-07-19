@@ -83,6 +83,24 @@ class Logout(Resource):
 
 api.add_resource(Logout, '/logout')
 
+class PlayerGameById(Resource):
+    def get(self, id):
+        playerGame = PlayerGame.query.filter(PlayerGame.id == id).first()
+
+        if not playerGame:
+            response_body = {
+                "error": "game not found"
+            }
+            status = 404
+
+        else:
+            response_body = playerGame.to_dict(only=('id', 'home_score', 'away_score', 'player_id', 'game_id'))
+            status = 200
+
+        return make_response(jsonify(response_body), status)
+
+api.add_resource(PlayerGameById, '/players/<int:id>')
+
 class Players(Resource):
     def get(self):
         players = Player.query.all()

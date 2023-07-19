@@ -6,7 +6,7 @@ function CourtList({courts, joinGame}){
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>
+                    <th className="row-name">
                     </th>
                     <th>
                         Court

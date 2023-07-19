@@ -1,17 +1,20 @@
 import React from "react"
 import Game from './Game'
+import PlayerProfile from './PlayerProfile'
 
-function GameList({games, joinGame, updateJoinGameFormData}){
+function ProfileList({games, loggedInPlayer}){
 
     return(
         <table class="table table-striped">
-            <tbody>
+            <thead>
                 <tr>
                     <th className="row-name">
+                    </th>
+                    <th>
                         Date/Time
                     </th>
                     <th>
-                        Court
+                        Location
                     </th>
                     <th>
                         Skill Level
@@ -25,18 +28,17 @@ function GameList({games, joinGame, updateJoinGameFormData}){
                     <th>
                         Spots Remaining
                     </th>
-                    <th>
-                        Join Game
-                    </th>
                 </tr>
-                {games.map(game => {
-                    return <Game key={game.id} game={game} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData} />
-                    /** ^^^Render a list of <Store> components here. */
+            </thead>
+            <tbody>
 
+                {games.map(game => {
+                    return <PlayerProfile key={game.id} game={game} loggedInPlayer={loggedInPlayer}/>
+                    /** ^^^Render a list of <Store> components here. */
                 })}
             </tbody>
         </table>
     )
 }
 
-export default GameList
+export default ProfileList
