@@ -5,6 +5,8 @@ import {useState, useEffect} from 'react'
 
 function PlayerProfile({loggedInPlayer}) {
 
+  console.log()
+
   return (
     <div class="profile">
         <h2>
@@ -42,6 +44,7 @@ function PlayerProfile({loggedInPlayer}) {
                 <table class="table-sm">
                   <thead>
                     <tr>
+                      <th scope="col">Game #</th>
                       <th scope="col">Date/Time</th>
                       <th scope="col">Location</th>
                       <th scope="col">Skill Level</th>
@@ -52,8 +55,9 @@ function PlayerProfile({loggedInPlayer}) {
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row">{game.date_time}</th>
-                      <td>Placeholder Value</td>
+                      <th scope="row">1</th>
+                      <td>{game.date_time}</td>
+                      <td>{game.court.title}</td>
                       <td>{game.skill_level}</td>
                       <td>{game.gender}</td>
                       <td>{game.game_type}</td>

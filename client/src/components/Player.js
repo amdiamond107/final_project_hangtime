@@ -3,10 +3,13 @@ function Player({player, joinGame}){
     return (
         <tr>
             <td className="row-name">
-                {/* <img src={player.image} /> */}
+                <img src={player.player_image} class="img-resize"/>
+            </td>
+            <td class="table-data">
+                <span>{player.username}</span>
             </td>
             <td>
-                <span>{player.username}</span>
+                <span>{player.age}</span>
             </td>
             <td>
                 <span>{player.gender}</span>

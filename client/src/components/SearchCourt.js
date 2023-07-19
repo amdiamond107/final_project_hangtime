@@ -2,7 +2,7 @@ function SearchCourt({setSearchCourtText, searchCourtText}) {
     return (
 <div className="searchbar">
 <label htmlFor="/search_court">
-<h2>Search Courts</h2>
+<h3>Search Courts</h3>
 </label>
 <input
     type="text"

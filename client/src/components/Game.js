@@ -24,7 +24,7 @@ function Game({game, joinGame, updateJoinGameFormData}){
             </td>
 
             {hasJoinedGame ? (
-            <button onClick={() => {
+            <button class="btn btn-primary" type="button" onClick={() => {
                 joinGame(game.id, game.spots_remaining + 1)
                 setHasJoinedGame(false)
             }} className="primary">Leave Game
@@ -32,7 +32,7 @@ function Game({game, joinGame, updateJoinGameFormData}){
             
             ) : (
                 
-                <button onClick={() => {
+                <button class="btn btn-primary" type="button" onClick={() => {
                     joinGame(game.id, game.spots_remaining - 1)
                     setHasJoinedGame(true)
                 }}>Join Game</button>

@@ -27,9 +27,9 @@ with app.app_context():
     player_games.append(PlayerGame(home_score=94, away_score=90, player_id=3, game_id=3))
 
     courts = []
-    courts.append(Court(title="Holcombe Rucker Park", location="West 155th St, New York, NY, 10039", court_image='https://ibb.co/kqCPJWH', court_type="Outdoor"))
-    courts.append(Court(title="PS 6 Gym", location="45 East 81st St, New York, NY, 10028", court_image='https://ibb.co/Rvf5vGp', court_type="Indoor"))
-    courts.append(Court(title="Columbia Prep Gym", location="5 West 93rd St, New York, NY, 10025", court_image='https://ibb.co/4YW4ghJ', court_type="Indoor"))
+    courts.append(Court(title="Holcombe Rucker Park", location="West 155th St, New York, NY, 10039", court_image='https://cassiuslife.com/wp-content/uploads/sites/47/2021/06/16226430909232.jpg?strip=all&quality=80&w=1024&crop=0,0,100,683px', court_type="Outdoor"))
+    courts.append(Court(title="PS 6 Gym", location="45 East 81st St, New York, NY, 10028", court_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6KnwWtjHo8hcAQsWQJ9tprOf1kq1ScWyP3g&usqp=CAU', court_type="Indoor"))
+    courts.append(Court(title="Columbia Prep Gym", location="5 West 93rd St, New York, NY, 10025", court_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8NXGocvFGynBwnOQH1R2IZ_sIa2Fqo9uaCA&usqp=CAU', court_type="Indoor"))
 
     db.session.add_all(players)
     db.session.add_all(player_games)

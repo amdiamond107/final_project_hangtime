@@ -5,36 +5,39 @@ function GameList({games, joinGame, updateJoinGameFormData}){
 
     return(
         <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <th className="row-name">
-                        Date/Time
-                    </th>
-                    <th>
-                        Court
-                    </th>
-                    <th>
-                        Skill Level
-                    </th>
-                    <th>
-                        Gender
-                    </th>
-                    <th>
-                        Game Type
-                    </th>
-                    <th>
-                        Spots Remaining
-                    </th>
-                    <th>
-                        Join Game
-                    </th>
-                </tr>
-                {games.map(game => {
-                    return <Game key={game.id} game={game} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData} />
-                    /** ^^^Render a list of <Store> components here. */
+            <thead class="table-dark">
+                    <tr>
+                        <th className="row-name">
+                            Date/Time
+                        </th>
+                        <th>
+                            Court
+                        </th>
+                        <th>
+                            Skill Level
+                        </th>
+                        <th>
+                            Gender
+                        </th>
+                        <th>
+                            Game Type
+                        </th>
+                        <th>
+                            Spots Remaining
+                        </th>
+                        <th>
+                            Join Game
+                        </th>
+                    </tr>
+            </thead>
+                <tbody>
 
-                })}
-            </tbody>
+                    {games.map(game => {
+                        return <Game key={game.id} game={game} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData} />
+                        /** ^^^Render a list of <Store> components here. */
+
+                    })}
+                </tbody>
         </table>
     )
 }

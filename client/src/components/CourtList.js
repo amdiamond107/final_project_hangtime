@@ -3,8 +3,8 @@ import Court from './Court'
 function CourtList({courts, joinGame}){
 
     return(
-        <table class="table table-striped">
-            <thead>
+        <table class="table">
+            <thead class="table-dark">
                 <tr>
                     <th className="row-name">
                     </th>

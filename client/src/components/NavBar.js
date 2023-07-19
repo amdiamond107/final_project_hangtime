@@ -30,10 +30,10 @@ function NavBar({handleLogOut}){
                     <li class="nav-item">
                     <NavLink className="nav-link" to="/profile">Profile</NavLink>
                     </li>
-                    <li class="nav-item">
-                    <button className="nav-link" onClick={handleLogOut}>Log Out</button>
-                    </li>
                 </ul>
+                <form class="d-flex" role="search">
+                    <button class="btn btn-outline-secondary" type="submit" onClick={handleLogOut}>Log Out</button>
+                </form>
                 </div>
             </div>
         </nav>

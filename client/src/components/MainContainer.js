@@ -1,4 +1,6 @@
-
+import '../normalize.css';
+import '../bootstrap.min.css';
+import '../App.css';
 import {useState, useEffect} from 'react'
 import { Route, Switch } from "react-router-dom"
 import {NavLink} from "react-router-dom"
@@ -15,6 +17,7 @@ import NewGameForm from './NewGameForm'
 import UpdatePlayerForm from './UpdatePlayerForm'
 import UpdateGameForm from './UpdateGameForm'
 import SearchGame from "./SearchGame";
+import SearchPlayers from "./SearchPlayers";
 import SearchCourt from "./SearchCourt";
 import PlayerProfile from "./PlayerProfile";
 
@@ -45,6 +48,7 @@ function MainContainer() {
   const [patchCourtFormData, setPatchCourtFormData] = useState({})
 
   const [searchGameText, setSearchGameText] = useState("")
+  const [searchPlayerText, setSearchPlayerText] = useState("")
   const [searchCourtText, setSearchCourtText] = useState("")
 
   const [loginFormData, setLoginFormData] = useState({})
@@ -222,7 +226,6 @@ function MainContainer() {
         })
     }
 
-
     function updateJoinGameFormData(event){
         setPatchGameFormData({...patchGameFormData, [event.target.name]: event.target.value})
     } 
@@ -248,6 +251,13 @@ function MainContainer() {
     } 
     return game.court.title.toLowerCase().includes(searchGameText.toLowerCase()) || game.date_time.toLowerCase().includes(searchGameText.toLowerCase()) || game.skill_level.toLowerCase().includes(searchGameText.toLowerCase()) || game.gender.toLowerCase().includes(searchGameText.toLowerCase()) 
     })
+
+    const filteredPlayers = players.filter(player => {
+      if(player === ""){
+        return true
+      } 
+      return player.username.toLowerCase().includes(searchPlayerText.toLowerCase()) || player.position.toLowerCase().includes(searchPlayerText.toLowerCase()) || player.height.toLowerCase().includes(searchPlayerText.toLowerCase())  || player.weight.toLowerCase().includes(searchPlayerText.toLowerCase())  || player.gender.toLowerCase().includes(searchPlayerText.toLowerCase()) 
+      })
 
     const filteredCourts = courts.filter(court => {
       if(searchCourtText === ""){
@@ -285,15 +295,16 @@ function MainContainer() {
 
   return (
     <div className="app">
-      {loggedInPlayer ? <NavBar handleLogOut= {handleLogOut}/> : <LoggedOutNavBar/>}
+      {loggedInPlayer ? <NavBar handleLogOut={handleLogOut}/> : <LoggedOutNavBar/>}
 
       {/* <Header/> */}
       <Switch>
 
         <Route exact path="/">
-          <h1>Find a court to join a game or to schedule a new one at...</h1>
-          <SearchCourt setSearchCourtText={setSearchCourtText} searchCourtText={searchCourtText} />
-          <CourtList courts={courts}/>
+        {loggedInPlayer ? <div class="header-search">
+            <SearchCourt setSearchCourtText={setSearchCourtText} searchCourtText={searchCourtText} />
+           <CourtList courts={courts}/>
+          </div> : null}
         </Route>
 
         <Route exact path="/login">
@@ -302,22 +313,21 @@ function MainContainer() {
         </Route>
 
         <Route exact path="/courts">
-          <h1>Find a court to join a game or to schedule a new one at...</h1>
+          <div class="header-search">
           <SearchCourt setSearchCourtText={setSearchCourtText} searchCourtText={searchCourtText} />
+          </div>
+
           <CourtList courts={filteredCourts} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData}/>
         </Route>
 
         <Route exact path="/find_games">
-          <br>
-          </br>
 
-          <h1>
-              You've got next - join upcoming games below...
-          </h1>
+          <div class="header-search">
           <SearchGame setSearchGameText={setSearchGameText} searchGameText={searchGameText} />
           <br>
           </br>
           <GameList games={filteredGames} joinGame={joinGame} updateJoinGameFormData={updateJoinGameFormData}/>
+          </div>
         
         </Route>
 
@@ -327,8 +337,8 @@ function MainContainer() {
         </Route>
 
         <Route exact path="/players">
-          <h1>Squad up - invite another Hangtime Baller to join in on one of your upcoming games...</h1>
-          <PlayerList players={players}/>
+          <SearchPlayers setSearchPlayerText={setSearchPlayerText} searchPlayerText={searchPlayerText} />
+          <PlayerList players={filteredPlayers}/>
         </Route>
 
         <Route path="/profile">

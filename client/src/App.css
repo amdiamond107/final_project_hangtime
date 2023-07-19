@@ -54,6 +54,15 @@
 
 }
 
+.Header{
+    margin: 25px;
+}
+
+.header-search{
+  margin: 10px;
+}
+
+
 .noselect {
 
   -webkit-touch-callout: none;
@@ -64,6 +73,17 @@
             user-select: none;
 
 }
+
+.img-resize {
+  max-width: 120px;
+  max-height: 120px;
+  shape-margin: square;
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+
 .player {
   border-color: black;
 }

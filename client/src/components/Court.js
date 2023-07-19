@@ -2,9 +2,9 @@ import {NavLink} from "react-router-dom"
 
 function Court({court}){
     return (
-        <tr>
-            <td className="row-name">
-                <img src={court.court_image} />
+        <tr class="align-middle">
+            <td>
+                <img src={court.court_image} class="img-resize"/>
             </td>
             <td>
                 <span>{court.title}</span>
@@ -13,10 +13,10 @@ function Court({court}){
                 <span>{court.location} ({court.court_type})</span>
             </td>
             <td>
-                <NavLink to="/find_games">View Games</NavLink>
+                <NavLink className="btn btn-outline-secondary" to="/find_games">View Games</NavLink>
             </td>
             <td>
-                <NavLink to="/create_games">Create New Game</NavLink>
+                <NavLink className="btn btn-outline-primary" to="/create_games">Create New Game</NavLink>
             </td>
         </tr>
     )

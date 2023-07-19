@@ -7,7 +7,7 @@ function SearchGame({setSearchGameText, searchGameText}) {
 <input
     type="text"
     id="search"
-    placeholder="Search for games to join..."
+    placeholder="You've got next! Search for upcoming games in your area and click JOIN GAME to claim your spot..."
     onChange={(event) => {
       setSearchGameText(event.target.value)
     }}

@@ -36,7 +36,11 @@ class Login(Resource):
             response_body = player.to_dict(only=('id', 'username', 'age', 'gender', 'height', 'weight', 'position', 'player_image'))
             games_list = []
             for game in player.games:
-                games_list.append(game.to_dict(only=('id', 'date_time', 'skill_level', 'gender', 'game_type', 'spots_remaining', 'court_id')))
+                game_dict = game.to_dict(only=('id', 'date_time', 'skill_level', 'gender', 'game_type', 'spots_remaining', 'court_id'))
+                game_dict.update({
+                    "court": game.court.to_dict(only=('id', 'title'))
+                })
+                games_list.append(game_dict)
 
             response_body.update({
                 "games": games_list
@@ -59,7 +63,11 @@ class CheckSession(Resource):
             response_body = player.to_dict(only=('id', 'username', 'age', 'gender', 'height', 'weight', 'position', 'player_image'))
             games_list = []
             for game in player.games:
-                games_list.append(game.to_dict(only=('id', 'date_time', 'skill_level', 'gender', 'game_type', 'spots_remaining', 'court_id')))
+                game_dict = game.to_dict(only=('id', 'date_time', 'skill_level', 'gender', 'game_type', 'spots_remaining', 'court_id'))
+                game_dict.update({
+                    "court": game.court.to_dict(only=('id', 'title'))
+                })
+                games_list.append(game_dict)
 
             response_body.update({
                 "games": games_list
