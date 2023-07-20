@@ -13,7 +13,7 @@ with app.app_context():
 
     players = []
     players.append(Player(username="dishindimes88", password="Amd1071988", age=34, gender="male", height="6 feet 0 inches", weight="200 pounds", position="SG", player_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCcBwOU8ObIGXPKNXInNlGSHXUPE1p3ztkQw&usqp=CAU'))
-    players.append(Player(username="mace-in-yo-face", password="mason", age=28, gender="male", height="6 feet 5 inches", weight="225 pounds", position="PF", player_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdNXhYk1U5pnioghzq2MyWqJl5XA_0lZ38Ng&usqp=CAU'))
+    players.append(Player(username="Ms. Don't Miss", password="scorer123", age=28, gender="female", height="5 feet 8 inches", weight="135 pounds", position="PG", player_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdNXhYk1U5pnioghzq2MyWqJl5XA_0lZ38Ng&usqp=CAU'))
     players.append(Player(username="dunkmasterflex", password="dunk123", age=25, gender="male", height="6 feet 9 inches", weight="250 pounds", position="C", player_image='https://thumbs.dreamstime.com/b/street-ball-basketball-streetballer-dunk-942736.jpg'))
 
     games = []

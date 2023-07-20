@@ -303,7 +303,7 @@ function MainContainer() {
         <Route exact path="/">
         {loggedInPlayer ? <div class="header-search">
             <SearchCourt setSearchCourtText={setSearchCourtText} searchCourtText={searchCourtText} />
-           <CourtList courts={courts}/>
+           <CourtList courts={filteredCourts}/>
           </div> : null}
         </Route>
 

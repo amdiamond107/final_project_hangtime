@@ -1,8 +1,8 @@
 function Player({player, joinGame}){
 
     return (
-        <tr>
-            <td className="row-name">
+        <tr class="align-middle">
+            <td>
                 <img src={player.player_image} class="img-resize"/>
             </td>
             <td class="table-data">
@@ -23,7 +23,9 @@ function Player({player, joinGame}){
             <td>
                 <span>{player.weight}</span>
             </td>
-            <button onClick={() => joinGame(player.id)}>Invite to Play</button>
+            <td>
+            <button  class="btn btn-primary" type="button" onClick={() => joinGame(player.id)}>Invite to Play</button>
+            </td>
         </tr>
     )
 }
