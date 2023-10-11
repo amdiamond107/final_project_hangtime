@@ -8,7 +8,7 @@ from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from flask_cors import CORS
 
-from models import db, Player, PlayerGame, Game, Court
+from .models import db, Player, PlayerGame, Game, Court
 
 app = Flask(__name__)
 app.secret_key = b'~\xee\xfb\x97>W\\\xc0\x88\xce\n\xb0\xcf\xf6\xa1\xc1'
