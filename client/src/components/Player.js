@@ -3,7 +3,7 @@ function Player({player, joinGame}){
     return (
         <tr class="align-middle">
             <td>
-                <img src={player.player_image} class="img-resize"/>
+                <img src={player.player_image} class="img-resize" alt="player_name"/>
             </td>
             <td class="table-data">
                 <span>{player.username}</span>

@@ -1,5 +1,5 @@
 import '../normalize.css';
-import '../bootstrap.min.css';
+import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import React from "react";
 import Header from "./Header";

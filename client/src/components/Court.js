@@ -4,7 +4,7 @@ function Court({court}){
     return (
         <tr class="align-middle">
             <td>
-                <img src={court.court_image} class="img-resize"/>
+                <img src={court.court_image} class="img-resize" alt="player name"/>
             </td>
             <td>
                 <span>{court.title}</span>
